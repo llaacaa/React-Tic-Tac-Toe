@@ -87,18 +87,25 @@ function App() {
       const gameBoardCopy = [
         ...prevGameBoard.map((innerArray) => [...innerArray]),
       ];
+      setPlayerTurns((currPlayerTurns) => {
+        if (currPlayerTurns.length === 9) {
+          if (CheckGameWinner(gameBoardCopy, "X")) {
+            setWinner(inputValueName1);
+          } else if (CheckGameWinner(gameBoardCopy, "O")) {
+            setWinner(inputValueName2);
+          } else {
+            setWinner("DRAW");
+          }
+        }
+        return currPlayerTurns;
+      });
       if (CheckGameWinner(gameBoardCopy, "X")) {
         setWinner(inputValueName1);
       }
       if (CheckGameWinner(gameBoardCopy, "O")) {
         setWinner(inputValueName2);
       }
-      setPlayerTurns((currPlayerTurns) => {
-        if (currPlayerTurns.length === 9) {
-          setWinner("DRAW");
-        }
-        return currPlayerTurns;
-      });
+
       return gameBoardCopy;
     });
   };
